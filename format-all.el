@@ -130,14 +130,13 @@ STATUS is :reformatted.")
                  ((string-match "netbsd"  system-configuration) 'netbsd))))))
     "Current operating system according to the format-all package."))
 
-(eval-when-compile
-  (defun format-all--resolve-system (choices)
-    "Get first choice matching `format-all--system-type' from CHOICES."
-    (cl-dolist (choice choices)
-      (cond ((atom choice)
-             (cl-return choice))
-            ((eql format-all--system-type (car choice))
-             (cl-return (cadr choice)))))))
+(defun format-all--resolve-system (choices)
+  "Get first choice matching `format-all--system-type' from CHOICES."
+  (cl-dolist (choice choices)
+    (cond ((atom choice)
+           (cl-return choice))
+          ((eql format-all--system-type (car choice))
+           (cl-return (cadr choice))))))
 
 (defun format-all--fix-trailing-whitespace ()
   "Fix trailing whitespace since some formatters don't do that."
